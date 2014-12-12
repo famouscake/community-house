@@ -172,8 +172,17 @@
     <Compile Include="Migrations\201412121959195_pictures-table.Designer.cs">
       <DependentUpon>201412121959195_pictures-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412122004072_houses-table.cs" />
+    <Compile Include="Migrations\201412122004072_houses-table.Designer.cs">
+      <DependentUpon>201412122004072_houses-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412122005254_pircute-to-house-rel.cs" />
+    <Compile Include="Migrations\201412122005254_pircute-to-house-rel.Designer.cs">
+      <DependentUpon>201412122005254_pircute-to-house-rel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\House.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Picture.cs" />
@@ -253,6 +262,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412121959195_pictures-table.resx">
       <DependentUpon>201412121959195_pictures-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412122004072_houses-table.resx">
+      <DependentUpon>201412122004072_houses-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412122005254_pircute-to-house-rel.resx">
+      <DependentUpon>201412122005254_pircute-to-house-rel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

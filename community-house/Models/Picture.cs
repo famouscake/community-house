@@ -11,5 +11,9 @@ namespace community_house.Models
 
         public string FileName { get; set; }
 
+        public int HouseID { get; set; }
+
+        public House House { get; set; }
+
     }
 }
