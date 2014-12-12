@@ -54,6 +54,10 @@ namespace community_house.Controllers
             {
                 db.Houses.Add(house);
                 db.SaveChanges();
+
+                db.Pictures.Add(new Picture { FileName = "test1.png", HouseID = house.HouseID });
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
