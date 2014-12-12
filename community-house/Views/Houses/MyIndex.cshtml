@@ -1,0 +1,63 @@
+﻿@model IEnumerable<community_house.Models.House>
+
+@{
+    ViewBag.Title = "MyIndex";
+}
+
+<h2>MyIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Image
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.ActionLink("Price", "MyIndex", new { sortOrder = "price" })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt="Alternate Text" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.HouseID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.HouseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.HouseID })
+        </td>
+    </tr>
+}
+
+</table>

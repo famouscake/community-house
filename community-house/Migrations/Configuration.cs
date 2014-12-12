@@ -1,6 +1,7 @@
 namespace community_house.Migrations
 {
     using community_house.Models;
+    using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -30,9 +31,9 @@ namespace community_house.Migrations
 
             List<Picture> Pictures = new List<Picture>
             {
-                new Picture{FileName = "test.png", HouseID = 1},
-                new Picture{FileName = "test.png", HouseID = 2},
-                new Picture{FileName = "test.png", HouseID = 3}
+                new Picture{FileName = "test1.jpg", HouseID = 1},
+                new Picture{FileName = "test2.jpg", HouseID = 2},
+                new Picture{FileName = "test3.jpg", HouseID = 3}
             };
 
             Pictures.ForEach(s => context.Pictures.Add(s));

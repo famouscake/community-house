@@ -15,6 +15,31 @@ namespace community_house.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Houses
+        public ActionResult MyIndex(string sortOrder)
+        {
+            var houses = db.Houses.
+                Include(h => h.User).
+                Include(h => h.Pictures).
+                Where(h => h.UserId == db.Users.FirstOrDefault(s => s.Email == User.Identity.Name).Id);
+
+
+            switch (sortOrder)
+            {
+                case "price":
+                    houses = houses.OrderByDescending(s => s.Price);
+                    break;
+                case "area":
+                    houses = houses.OrderBy(s => s.Area);
+                    break;
+                default:
+                    houses = houses.OrderBy(s => s.UserId);
+                    break;
+            }
+
+            return View(houses.ToList());
+        }
+
+        // GET: Houses
         public ActionResult Index()
         {
             var houses = db.Houses.Include(h => h.User).Include(h=>h.Pictures);
