@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Houses", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -49,6 +49,8 @@
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <input id="ImagePath" title="Upload a product image" type="file" name="file" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

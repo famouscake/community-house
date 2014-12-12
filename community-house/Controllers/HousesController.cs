@@ -48,14 +48,19 @@ namespace community_house.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HouseID,UserId,Price,Area,City,Address")] House house)
+        public ActionResult Create([Bind(Include = "HouseID,UserId,Price,Area,City,Address")] House house, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    file.SaveAs(HttpContext.Server.MapPath("~/Public/Images/") + file.FileName);                    
+                }
+
                 db.Houses.Add(house);
                 db.SaveChanges();
 
-                db.Pictures.Add(new Picture { FileName = "test1.png", HouseID = house.HouseID });
+                db.Pictures.Add(new Picture { FileName = file.FileName, HouseID = house.HouseID });
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
