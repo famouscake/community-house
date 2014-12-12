@@ -17,7 +17,7 @@ namespace community_house.Controllers
         // GET: Houses
         public ActionResult Index()
         {
-            var houses = db.Houses.Include(h => h.User);
+            var houses = db.Houses.Include(h => h.User).Include(h=>h.Pictures);
             return View(houses.ToList());
         }
 

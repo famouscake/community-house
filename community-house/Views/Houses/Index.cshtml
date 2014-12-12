@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            Image
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
@@ -31,6 +34,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt ="Alternate Text" />
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.Email)
         </td>
