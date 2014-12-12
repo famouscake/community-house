@@ -29,5 +29,7 @@ namespace community_house.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Models.Picture> Pictures { get; set; }
     }
 }

@@ -168,10 +168,15 @@
     <Compile Include="Migrations\201412121953248_initial-migration.Designer.cs">
       <DependentUpon>201412121953248_initial-migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412121959195_pictures-table.cs" />
+    <Compile Include="Migrations\201412121959195_pictures-table.Designer.cs">
+      <DependentUpon>201412121959195_pictures-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -245,6 +250,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412121953248_initial-migration.resx">
       <DependentUpon>201412121953248_initial-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412121959195_pictures-table.resx">
+      <DependentUpon>201412121959195_pictures-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
