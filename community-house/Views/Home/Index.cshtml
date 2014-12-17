@@ -3,29 +3,30 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Community Houses</h1>
+    <p class="lead">Community Houses is a free web real estate platform.</p>
+    @Html.ActionLink("Pick a house »", "Index", "Houses", new { @class = "btn btn btn-primary btn-lg" })
 </div>
 
 <div class="row">
+    
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Getting started!</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            You can get started by creating an account and then " ‘Why don’t you like to be touched?’ I whisper, staring up into soft gray eyes. ‘Because I’m fifty shades of fucked up, Anastasia.’ ” setting a price range or picking the city you would like to live in!
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        @Html.ActionLink("Learn More »", "Index", "Houses", new { @class = "btn btn-default" })
     </div>
+
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Create your own account!</h2>
+        <p> Register your own account if you “The heart is capable of sacrifice. So is the vagina. The heart is able to forgive and repair. It can change it's shape to let us in. It can expand to let us out. So can the vagina. It can ache for us and stretch for us, die for us and bleed and bleed us into this difficult, wondrous world. So can the vagina. I was there in the room. I remeber.” don't want to pay moneyz to real estate angent with smelly feet and go </p>
+        @Html.ActionLink("Register NOW! »", "Register", "Account", new { @class = "btn btn-default" })
     </div>
+
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Add houses to your favorites!</h2>
+        <p> Using our platform you can search through various houses and whenever you stumble upon ones you like - add them to your favorites and come back to them again!</p>
+        @Html.ActionLink("Log in »", "Login", "Account", new { @class = "btn btn-default" })
     </div>
 </div>

@@ -7,8 +7,7 @@
 <h2>All Houses</h2>
 
 <div class="row">
-    <div class="col-sm-6">
-
+    <div class="col-sm-6">  
 
         @using (Html.BeginForm("Index", "Houses", FormMethod.Get))
         {
@@ -65,7 +64,7 @@
                 {
                     <tr>
                         <td>
-                            <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt="Alternate Text" />
+                            <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt="Image not Found!" />
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.City)
@@ -80,12 +79,19 @@
                             @Html.DisplayFor(modelItem => item.User.Email)
                         </td>
                         <td>
-                            @if (item.Favourites.Where(a => a.User.Email.Equals(User.Identity.Name)).Count() == 0)
-                            {
-                                @Html.ActionLink("Favourite", "Create", "Favourites", new { houseID = item.HouseID }, null)
+                            @if (Request.IsAuthenticated) 
+                            { 
                                 
+                                if ( item.Favourites.Where(a => a.User.Email.Equals(User.Identity.Name)).Count() == 0 )
+                                {
+                                    @Html.ActionLink("Favorite", "Create", "Favourites", new { houseID = item.HouseID }, null)
+                                
+                                }
+                                else
+                                {
+                                    <p>Already in Favorites</p>
+                                }
                             }
-                            
                         </td>
                     </tr>
                 }

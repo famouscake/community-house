@@ -19,6 +19,7 @@ namespace community_house.Controllers
         public ActionResult Create(int houseID)
         {
             this.db.Favourites.Add(new Favourite { HouseID = houseID, UserId = db.Users.FirstOrDefault(s => s.Email == User.Identity.Name).Id });
+
             this.db.SaveChanges();
             return RedirectToAction("Index", "Houses");
         }

@@ -23,9 +23,7 @@ namespace community_house.Controllers
                          join z in db.Users on x.UserId equals z.Id
                          where x.UserId.Equals(db.Users.FirstOrDefault(s => s.Email == User.Identity.Name).Id)
                          select y;
-
-            //db.Favourites.Remove()
-
+            
             return View(houses.ToList());
         }
 
@@ -47,7 +45,6 @@ namespace community_house.Controllers
             IQueryable<House> houses = this.GetSortedHouses(sortOrder);
 
             this.ViewData = this.InitializeViewBagSortOrder(sortOrder);
-
 
             if (searchStringCity != null && searchStringCity != "")
             {
