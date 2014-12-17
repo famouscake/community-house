@@ -16,8 +16,23 @@ namespace community_house.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Houses
+        public ActionResult MyFavourites()
+        {
+            var houses = from x in db.Favourites
+                         join y in db.Houses on x.HouseID equals y.HouseID
+                         join z in db.Users on x.UserId equals z.Id
+                         where x.UserId.Equals(db.Users.FirstOrDefault(s => s.Email == User.Identity.Name).Id)
+                         select y;
+
+            //db.Favourites.Remove()
+
+            return View(houses.ToList());
+        }
+
+        // GET: Houses
         public ActionResult MyIndex()
         {
+
             IQueryable<House> houses = db.Houses.
                 Include(h => h.User).
                 Include(h => h.Pictures).
@@ -33,15 +48,25 @@ namespace community_house.Controllers
 
             this.ViewData = this.InitializeViewBagSortOrder(sortOrder);
 
-            if (searchStringCity != null || searchStringCity != "")
+
+            if (searchStringCity != null && searchStringCity != "")
             {
                 houses = houses
                     .Where(x => x.City == searchStringCity);
                     
             }
 
-            houses = houses.Where(x => (x.Price > searchStringMinPrice) && (x.Price < searchStringMaxPrice));
+            if (searchStringMinPrice != 0)
+            {
+                houses = houses.Where(x => (x.Price > searchStringMinPrice));
 
+            }
+
+            if (searchStringMaxPrice != Int32.MaxValue)
+            {
+                houses = houses.Where(x => (x.Price < searchStringMaxPrice));
+            }
+            
             return View(houses.ToList());
         }
 
@@ -165,7 +190,7 @@ namespace community_house.Controllers
 
         private IQueryable<House> GetSortedHouses(string sortOrder = "cityasc")
         {
-            IQueryable<House> houses = db.Houses.Include(h => h.User).Include(h => h.Pictures);
+            IQueryable<House> houses = db.Houses.Include(h => h.User).Include(h => h.Pictures).Include(h => h.Favourites);
             
             if (sortOrder == "cityasc") {
                 return houses.OrderBy(s => s.City);

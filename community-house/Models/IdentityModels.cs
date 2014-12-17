@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace community_house.Models
 {
@@ -16,6 +17,10 @@ namespace community_house.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual List<Favourite> Favourites { get; set; }
+        public virtual List<House> Houses { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

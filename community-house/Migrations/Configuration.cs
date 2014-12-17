@@ -45,6 +45,9 @@ namespace community_house.Migrations
                 new Favourite{HouseID = 2, UserId = context.Users.FirstOrDefault(s=>s.Email=="moonyy@abv.bg").Id}
             };
 
+            Favourites.ForEach(x => context.Favourites.Add(x));
+            context.SaveChanges();
+
 
             //context.Pictures.AddOrUpdate(new Models.Picture { });
             //  This method will be called after migrating to the latest version.

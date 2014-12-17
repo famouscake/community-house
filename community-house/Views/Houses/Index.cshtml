@@ -80,7 +80,12 @@
                             @Html.DisplayFor(modelItem => item.User.Email)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Favourites.First(x=>x.UserId == ))
+                            @if (item.Favourites.Where(a => a.User.Email.Equals(User.Identity.Name)).Count() == 0)
+                            {
+                                @Html.ActionLink("Favourite", "Create", "Favourites", new { houseID = item.HouseID }, null)
+                                
+                            }
+                            
                         </td>
                     </tr>
                 }
