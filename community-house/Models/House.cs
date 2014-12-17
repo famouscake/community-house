@@ -14,8 +14,8 @@ namespace community_house.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
-        public List<Picture> Pictures { get; set; }
-        public List<Favourite> Favourites { get; set; }
+        public virtual List<Picture> Pictures { get; set; }
+        public virtual List<Favourite> Favourites { get; set; }
 
         public double Price { get; set; }
         public double Area { get; set; }

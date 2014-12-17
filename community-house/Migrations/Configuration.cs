@@ -39,6 +39,12 @@ namespace community_house.Migrations
             Pictures.ForEach(s => context.Pictures.Add(s));
             context.SaveChanges();
 
+            List<Models.Favourite> Favourites = new List<Models.Favourite>
+            {
+                new Favourite{HouseID = 1, UserId = context.Users.FirstOrDefault(s=>s.Email=="moonyy@abv.bg").Id},
+                new Favourite{HouseID = 2, UserId = context.Users.FirstOrDefault(s=>s.Email=="moonyy@abv.bg").Id}
+            };
+
 
             //context.Pictures.AddOrUpdate(new Models.Picture { });
             //  This method will be called after migrating to the latest version.
