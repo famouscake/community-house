@@ -1,63 +1,53 @@
 ﻿@model IEnumerable<community_house.Models.House>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Houses";
 }
 
-<h2>Index</h2>
+<h2>All Houses</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Image
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Area)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-sm-6">
+        <table class="table">
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    @Html.ActionLink("City", "Index", new { sortOrder = "city" + ViewData["city"] })
+                </th>
+                <th>                    
+                    @Html.ActionLink("Area", "Index", new { sortOrder = "area" + ViewData["area"] })
+                </th>
+                <th>
+                    @Html.ActionLink("Price", "Index", new { sortOrder = "price" + ViewData["price"] })
+                </th>
+                <th>
+                    @Html.ActionLink("Email", "Index", new { sortOrder = "email" + ViewData["email"] })
+                </th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt ="Alternate Text" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Area)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.HouseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.HouseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.HouseID })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt="Alternate Text" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)$
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+    </div>
+</div>

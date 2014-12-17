@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using community_house.Models;
 
+
 namespace community_house.Controllers
 {
     public class HousesController : Controller
@@ -15,34 +16,23 @@ namespace community_house.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Houses
-        public ActionResult MyIndex(string sortOrder)
+        public ActionResult MyIndex()
         {
-            var houses = db.Houses.
+            IQueryable<House> houses = db.Houses.
                 Include(h => h.User).
                 Include(h => h.Pictures).
                 Where(h => h.UserId == db.Users.FirstOrDefault(s => s.Email == User.Identity.Name).Id);
-
-
-            switch (sortOrder)
-            {
-                case "price":
-                    houses = houses.OrderByDescending(s => s.Price);
-                    break;
-                case "area":
-                    houses = houses.OrderBy(s => s.Area);
-                    break;
-                default:
-                    houses = houses.OrderBy(s => s.UserId);
-                    break;
-            }
 
             return View(houses.ToList());
         }
 
         // GET: Houses
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var houses = db.Houses.Include(h => h.User).Include(h=>h.Pictures);
+            IQueryable<House> houses = this.GetSortedHouses(sortOrder);
+
+            this.ViewData = this.InitializeViewBagSortOrder(sortOrder);
+            
             return View(houses.ToList());
         }
 
@@ -152,6 +142,7 @@ namespace community_house.Controllers
             db.Houses.Remove(house);
             db.SaveChanges();
             return RedirectToAction("Index");
+            
         }
 
         protected override void Dispose(bool disposing)
@@ -161,6 +152,93 @@ namespace community_house.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private IQueryable<House> GetSortedHouses(string sortOrder = "cityasc")
+        {
+            IQueryable<House> houses = db.Houses.Include(h => h.User).Include(h => h.Pictures);
+            
+            if (sortOrder == "cityasc") {
+                return houses.OrderBy(s => s.City);
+            }
+
+            if (sortOrder == "citydesc") {
+                return houses.OrderByDescending(s => s.City);
+            }
+
+            if (sortOrder == "areaasc") {
+                return houses.OrderBy(s => s.Area);
+            }
+
+            if (sortOrder == "areadisc") {
+                return houses.OrderByDescending(s => s.Area);
+            }
+
+            if (sortOrder == "priceasc") {
+                return houses.OrderBy( s => s.Price);
+            }
+
+            if (sortOrder == "pricedesc") {
+                return houses.OrderByDescending(s => s.Price);
+            }
+
+            if (sortOrder == "emailasc") {
+                return houses.OrderBy(s => s.User.Email);
+            }
+            if (sortOrder == "emaildesc") {
+                return houses.OrderByDescending(s => s.User.Email);
+            }
+
+            return houses;
+        }
+
+        private ViewDataDictionary InitializeViewBagSortOrder(string sortOrder)
+        {
+            ViewDataDictionary d = new ViewDataDictionary();
+
+            if (sortOrder == null || sortOrder == "")
+            {
+                sortOrder = "priceasc";
+            }
+
+            if (sortOrder == "cityasc")
+            {
+                d["city"] = "desc";
+            }
+            else
+            {
+                d["city"] = "asc";
+            }
+
+
+            if (sortOrder == "areaasc")
+            {
+                d["area"] = "desc";
+            }
+            else
+            {
+                d["area"] = "asc";
+            }
+
+            if (sortOrder == "priceasc")
+            {
+                d["price"] = "desc";
+            }
+            else
+            {
+                d["price"] = "asc";
+            }
+
+            if (sortOrder == "emailasc")
+            {
+                d["email"] = "desc";
+            }
+            else
+            {
+                d["email"] = "asc";
+            }
+
+            return d;
         }
     }
 }
