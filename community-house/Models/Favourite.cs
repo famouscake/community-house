@@ -6,21 +6,15 @@ using System.Web;
 
 namespace community_house.Models
 {
-    public class House
+    public class Favourite
     {
+        public int FavouriteID { get; set; }
+
         public int HouseID { get; set; }
-        
+        public virtual House House { get; set; }
+
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
-
-        public List<Picture> Pictures { get; set; }
-        public List<Favourite> Favourites { get; set; }
-
-        public double Price { get; set; }
-        public double Area { get; set; }
-        public string City { get; set; }
-
-        public string Address { get; set; }
     }
 }
