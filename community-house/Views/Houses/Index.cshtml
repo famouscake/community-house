@@ -8,46 +8,84 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <table class="table">
-            <tr>
-                <th>
-                    Image
-                </th>
-                <th>
-                    @Html.ActionLink("City", "Index", new { sortOrder = "city" + ViewData["city"] })
-                </th>
-                <th>                    
-                    @Html.ActionLink("Area", "Index", new { sortOrder = "area" + ViewData["area"] })
-                </th>
-                <th>
-                    @Html.ActionLink("Price", "Index", new { sortOrder = "price" + ViewData["price"] })
-                </th>
-                <th>
-                    @Html.ActionLink("Email", "Index", new { sortOrder = "email" + ViewData["email"] })
-                </th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
+
+        @using (Html.BeginForm("Index", "Houses", FormMethod.Get))
+        {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="control-label"> City </label>
+                        @Html.TextBox("SearchStringCity", null, new { @placeholder = "Search for a city...", @class = "form-control" }) <br />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="control-label"> Min Price </label>
+                        @Html.TextBox("SearchStringMinPrice", null, new { @placeholder = "Min Price...", @class = "form-control" }) <br />
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label class="control-label"> Max Price </label>
+                        @Html.TextBox("SearchStringMaxPrice", null, new { @placeholder = "Price...", @class = "form-control" }) <br />
+                    </div>
+                </div>
+
+
+                <input type="submit" value="Filter" class=" btn btn-success "/>
+        } 
+
+        @if (Model.Count() == 0)
+        {
+            <h1> No houses were found! </h1>
+        }
+        
+        else {
+
+            <table class="table">
                 <tr>
-                    <td>
-                        <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt="Alternate Text" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Area)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)$
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Email)
-                    </td>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        @Html.ActionLink("City", "Index", new { sortOrder = "city" + ViewData["city"] })
+                    </th>
+                    <th>                    
+                        @Html.ActionLink("Area", "Index", new { sortOrder = "area" + ViewData["area"] })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Price", "Index", new { sortOrder = "price" + ViewData["price"] })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Email", "Index", new { sortOrder = "email" + ViewData["email"] })
+                    </th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/Public/Images/@item.Pictures.FirstOrDefault().FileName" width="100" height="100" alt="Alternate Text" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Area)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)$
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Favourites.First(x=>x.UserId == ))
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
     </div>
 </div>

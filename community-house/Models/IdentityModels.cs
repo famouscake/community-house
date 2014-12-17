@@ -32,5 +32,6 @@ namespace community_house.Models
 
         public DbSet<Models.Picture> Pictures { get; set; }
         public DbSet<Models.House> Houses { get; set; }
+        public DbSet<Models.Favourite> Favourites { get; set; }
     }
 }

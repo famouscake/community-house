@@ -27,12 +27,21 @@ namespace community_house.Controllers
         }
 
         // GET: Houses
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchStringCity, int searchStringMinPrice = 0, int searchStringMaxPrice = Int32.MaxValue)
         {
             IQueryable<House> houses = this.GetSortedHouses(sortOrder);
 
             this.ViewData = this.InitializeViewBagSortOrder(sortOrder);
-            
+
+            if (searchStringCity != null || searchStringCity != "")
+            {
+                houses = houses
+                    .Where(x => x.City == searchStringCity);
+                    
+            }
+
+            houses = houses.Where(x => (x.Price > searchStringMinPrice) && (x.Price < searchStringMaxPrice));
+
             return View(houses.ToList());
         }
 
